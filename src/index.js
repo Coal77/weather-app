@@ -9,13 +9,13 @@ async function getTemperature(location, apiKey) {
         const body = await response.text()
         throw new Error(`Request failed with status ${response.status}: ${body}`);
     }
-    const data = await response.json();
-    return data.currentConditions.temp;
+    // const data = await response.json();
+    return response.json();
 }
 
 async function main() {
     try {
-        const temp = await getTemperature("new york", apiKey);
+        const temp = await getTemperature("New York", apiKey);
         console.log(temp);
     } catch (err) {
         console.log("Error!", err);
