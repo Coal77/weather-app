@@ -1,3 +1,4 @@
+import "./styles.css";
 const apiKey = process.env.VISUAL_CROSSING_API_KEY;
 
 async function getTemperature(location, apiKey) {
@@ -5,7 +6,8 @@ async function getTemperature(location, apiKey) {
 
     const response = await fetch(url);
     if(!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
+        const body = await response.text()
+        throw new Error(`Request failed with status ${response.status}: ${body}`);
     }
     const data = await response.json();
     return data.currentConditions.temp;
