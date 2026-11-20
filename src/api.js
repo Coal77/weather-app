@@ -28,11 +28,17 @@ function processWeather(data) {
         lowTemp: data.days[0].tempmin,
     };
 
-    const hourlyWeather = data.days[0].hours.map((hour) => ({
-        time: hour.datetime,
-        icon: hour.icon,
-        temp: hour.temp,
-    }));
+    const currentHour = parseInt(data.currentConditions.datetime, 10);
+
+    const hourlyWeather = data.days
+        .slice(0, 2)
+        .flatMap((day) => day.hours)
+        .slice(currentHour, currentHour + 24)
+        .map((hour) => ({
+            time: hour.datetime,
+            icon: hour.icon,
+            temp: hour.temp,
+        }));
 
     const weeklyWeather = data.days.slice(0, 7).map((day) => ({
         day: day.datetime,
@@ -41,12 +47,18 @@ function processWeather(data) {
         highTemp: day.tempmax,
     }));
 
+    const weekRange = {
+        min: Math.min(...weeklyWeather.map((day) => day.lowTemp)),
+        max: Math.max(...weeklyWeather.map((day) => day.highTemp)),
+    };
+
     return {
         city: cityName,
         current: currentWeather,
         hours: hourlyWeather,
         weeklyData: weeklyWeather,
-    }
+        weekRange: weekRange,
+    };
 }
 
 export { fetchWeather, processWeather }
