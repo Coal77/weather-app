@@ -1,0 +1,31 @@
+function renderCurrent(current) {
+    const city = document.querySelector(".city");
+    city.textContent = current.cityName;
+
+    const currentTemp = document.querySelector(".temp-value");
+    currentTemp.textContent = Math.round(current.temp);
+
+    const condition = document.querySelector(".conditions");
+    condition.textContent = current.conditions;
+
+    const range = document.querySelector(".range");
+    range.textContent = `High ${Math.round(current.highTemp)}°    Low ${Math.round(current.lowTemp)}    Feels like ${Math.round(current.feelsLike)}`;
+}
+
+function renderDetails(current) {
+    const items = [
+        { id: "humidity", text: `${Math.round(current.humidity)}%` },
+        { id: "wind", text: `${Math.round(current.wind)} km/h` },
+        { id: "rain-chance", text: `${Math.round(current.rainChance)}%` },
+        { id: "uv", text: Math.round(current.uv) },
+        { id: "sunrise", text: current.sunrise.slice(0, 5) },
+        { id: "sunset", text: current.sunset.slice(0, 5) },
+    ];
+
+    for (const item of items) {
+        const field = document.querySelector(`#${item.id}`);
+        field.textContent = item.text;
+    }
+}
+
+export { renderCurrent, renderDetails };

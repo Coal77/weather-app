@@ -11,9 +11,9 @@ async function fetchWeather(location, apiKey) {
 }
 
 function processWeather(data) {
-    const cityName = data.resolvedAddress;
     
     const currentWeather = {
+        cityName : data.resolvedAddress,
         temp: data.currentConditions.temp,
         feelsLike: data.currentConditions.feelslike,
         conditions: data.currentConditions.conditions,
@@ -53,7 +53,6 @@ function processWeather(data) {
     };
 
     return {
-        city: cityName,
         current: currentWeather,
         hours: hourlyWeather,
         weeklyData: weeklyWeather,
