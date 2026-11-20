@@ -1,3 +1,5 @@
+import { factoryElem } from "./factory.js"
+
 function renderCurrent(current) {
     const city = document.querySelector(".city");
     city.textContent = current.cityName;
@@ -17,7 +19,7 @@ function renderDetails(current) {
         { id: "humidity", text: `${Math.round(current.humidity)}%` },
         { id: "wind", text: `${Math.round(current.wind)} km/h` },
         { id: "rain-chance", text: `${Math.round(current.rainChance)}%` },
-        { id: "uv", text: Math.round(current.uv) },
+        { id: "uv-index", text: Math.round(current.uv) },
         { id: "sunrise", text: current.sunrise.slice(0, 5) },
         { id: "sunset", text: current.sunset.slice(0, 5) },
     ];
@@ -28,4 +30,19 @@ function renderDetails(current) {
     }
 }
 
-export { renderCurrent, renderDetails };
+function renderHours(hourlyStat) {
+    const hoursContainer = document.querySelector(".hourly");
+    hoursContainer.replaceChildren();
+
+    for (const hourdata of hourlyStat) {
+        const li = factoryElem("li", "hour", "");
+        const time = factoryElem("span", "hour-time", hourdata.time.slice(0, 5));
+        const icon = factoryElem("span", "hour-icon", hourdata.icon);
+        const temp = factoryElem("span", "hour-temp", hourdata.temp);
+
+        li.append(time, icon, temp);
+        hoursContainer.appendChild(li);
+    }
+}
+
+export { renderCurrent, renderDetails, renderHours };

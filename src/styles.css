@@ -23,6 +23,7 @@ body {
     background: var(--paper);
     color: var(--ink);
     line-height: 1.4;
+
 }
 
 ol, ul {
@@ -48,7 +49,7 @@ button, input {
 }
 
 .app {
-    max-width: 480px;
+    max-width: 50rem;
     margin: 0 auto;
     padding: 16px;
     display: grid;
@@ -174,6 +175,7 @@ button, input {
     background: var(--panel);
     border-radius: var(--radius);
     padding: 18px;
+    overflow-x: scroll;
 }
 
 .panel h2 {
