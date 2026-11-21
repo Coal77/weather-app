@@ -4,27 +4,41 @@ import { renderCurrent, renderDetails, renderHours, renderWeek } from "./ui.js";
 
 const apiKey = process.env.VISUAL_CROSSING_API_KEY;
 
-async function main(city) {
+const form = document.querySelector(".search");
+const input = document.querySelector("#location");
+const button = form.querySelector("button");
+const status = document.querySelector(".status");
+const units = document.querySelectorAll(".unit");
+
+function setStatus(message, isError = false) {
+    status.textContent = message;
+    status.classList.toggle("is-error", isError);
+    status.hidden = message === "";
+}
+
+async function search(city) {
+    form.classList.remove("is-invalid");
+    setStatus("Loading...");
+    button.disabled = true;
+
     try {
         const data = await fetchWeather(city, apiKey);
         const weather = processWeather(data);
-        
-        //* Render the hero ui
+
         renderCurrent(weather.current);
         renderDetails(weather.current);
         renderHours(weather.hours);
         renderWeek(weather.weeklyData, weather.weekRange);
-        
+
+        setStatus("");
     } catch (err) {
         console.error("Error!", err);
+        form.classList.add("is-invalid");
+        setStatus(`Couldn't get weather for "${city}".`, true);
+    } finally {
+        button.disabled = false;
     }
 }
-
-//* search feature
-const input = document.querySelector("#location");
-const form = document.querySelector(".search");
-
-const defaultPlaceholder = input.placeholder;
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -32,18 +46,15 @@ form.addEventListener("submit", (e) => {
     const city = input.value.trim();
     if (city === "") {
         form.classList.add("is-invalid");
-        input.placeholder = "Please enter a city.";
+        setStatus("Please enter a city.", true);
         return;
     }
 
-    form.classList.remove("is-invalid")
-
-    main(city);
+    search(city);
 });
 
 input.addEventListener("input", () => {
     form.classList.remove("is-invalid");
-    input.placeholder = defaultPlaceholder;
-})
+});
 
-main("London");
+search(input.value.trim());

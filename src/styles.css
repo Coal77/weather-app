@@ -123,6 +123,19 @@ button, input {
     color: #fff;
 }
 
+/* ---------- Status message ---------- */
+.status {
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: var(--panel);
+    color: var(--muted);
+}
+
+.status.is-error {
+    background: #fdecea;
+    color: #b3261e;
+}
+
 /* ---------- Current conditions (hero) ---------- */
 .current {
     padding: 28px 24px;
