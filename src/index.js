@@ -4,13 +4,12 @@ import { renderCurrent, renderDetails, renderHours, renderWeek } from "./ui.js";
 
 const apiKey = process.env.VISUAL_CROSSING_API_KEY;
 
-async function main() {
+async function main(city) {
     try {
-        const data = await fetchWeather("lagos", apiKey);
-        console.log(processWeather(data));
+        const data = await fetchWeather(city, apiKey);
+        const weather = processWeather(data);
         
         //* Render the hero ui
-        const weather = processWeather(data);
         renderCurrent(weather.current);
         renderDetails(weather.current);
         renderHours(weather.hours);
@@ -20,4 +19,31 @@ async function main() {
         console.error("Error!", err);
     }
 }
-main();
+
+//* search feature
+const input = document.querySelector("#location");
+const form = document.querySelector(".search");
+
+const defaultPlaceholder = input.placeholder;
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const city = input.value.trim();
+    if (city === "") {
+        form.classList.add("is-invalid");
+        input.placeholder = "Please enter a city.";
+        return;
+    }
+
+    form.classList.remove("is-invalid")
+
+    main(city);
+});
+
+input.addEventListener("input", () => {
+    form.classList.remove("is-invalid");
+    input.placeholder = defaultPlaceholder;
+})
+
+main("London");

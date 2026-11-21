@@ -97,6 +97,10 @@ button, input {
     cursor: pointer;
 }
 
+.search.is-invalid {
+    border-color: #d64545;
+}
+
 .units {
     display: flex;
     background: var(--panel);
