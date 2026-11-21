@@ -1,4 +1,5 @@
-import { factoryElem } from "./factory.js"
+import { factoryElem } from "./factory.js";
+import { getIcon } from "./icon.js";
 
 function renderCurrent(current) {
     const city = document.querySelector(".city");
@@ -7,7 +8,10 @@ function renderCurrent(current) {
     const date = document.querySelector(".date");
     const rawDate = new Date(`${current.date}T12:00:00`);
     const dateText = rawDate.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
-    date.textContent = dateText
+    date.textContent = dateText;
+
+    const icon = document.querySelector(".current-icon");
+    icon.textContent = getIcon(current.icon);
 
     const currentTemp = document.querySelector(".temp-value");
     currentTemp.textContent = Math.round(current.temp);
@@ -16,7 +20,7 @@ function renderCurrent(current) {
     condition.textContent = current.conditions;
 
     const range = document.querySelector(".range");
-    range.textContent = `High ${Math.round(current.highTemp)}°    Low ${Math.round(current.lowTemp)}    Feels like ${Math.round(current.feelsLike)}`;
+    range.textContent = `High ${Math.round(current.highTemp)}°    Low ${Math.round(current.lowTemp)}°    Feels like ${Math.round(current.feelsLike)}°`;
 }
 
 function renderDetails(current) {
@@ -39,11 +43,11 @@ function renderHours(hourlyStat) {
     const hoursContainer = document.querySelector(".hourly");
     hoursContainer.replaceChildren();
 
-    for (const hourdata of hourlyStat) {
-        const li = factoryElem("li", "hour", "");
+    for (const [ index, hourdata ] of hourlyStat.entries()) {
+        const li = factoryElem("li", index === 0 ? "hour is-now" : "hour", "");
         const time = factoryElem("span", "hour-time", hourdata.time.slice(0, 5));
-        const icon = factoryElem("span", "hour-icon", hourdata.icon);
-        const temp = factoryElem("span", "hour-temp", hourdata.temp);
+        const icon = factoryElem("span", "hour-icon", getIcon(hourdata.icon));
+        const temp = factoryElem("span", "hour-temp", hourdata.temp + "°");
 
         li.append(time, icon, temp);
         hoursContainer.appendChild(li);
@@ -65,7 +69,7 @@ function renderWeek(weeklyStat, weekRange) {
         const processedDay = rawDay.toLocaleDateString("en-GB", { weekday: "short" });
 
         const day = factoryElem("span", "day-name", index === 0 ? "Today" : processedDay);
-        const icon = factoryElem("span", "day-icon", weeklyData.icon);
+        const icon = factoryElem("span", "day-icon", getIcon(weeklyData.icon));
         const lowTemp = factoryElem("span", "day-low", `${Math.round(weeklyData.lowTemp)}°`);
         const highTemp = factoryElem("span", "day-high", `${Math.round(weeklyData.highTemp)}°`);
         const bar = factoryElem("span", "bar", "");

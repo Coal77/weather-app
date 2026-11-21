@@ -17,38 +17,29 @@
             </form>
             <div class="units" role="group" aria-label="Temperature unit">
                 <button class="unit is-active" aria-pressed="true">°C</button>
-                <button class="unit" aria-pressed="false">°F</button>
+                <!-- <button class="unit" aria-pressed="false">°F</button> -->
             </div>
         </header>
         <p class="status" role="status" hidden></p>
 
         <!-- Current conditions: the hero -->
         <section class="current" aria-labelledby="city">
-            <h1 id="city" class="city">London, England</h1>
-            <p class="date">Thursday, 19 November</p>
+            <h1 id="city" class="city"></h1>
+            <p class="date"></p>
 
             <div class="current-main">
-                <span class="current-icon" aria-hidden="true">⛅</span>
-                <p class="temp"><span class="temp-value">14</span><span class="deg">°</span></p>
+                <span class="current-icon" aria-hidden="true"></span>
+                <p class="temp"><span class="temp-value"></span><span class="deg">°</span></p>
             </div>
 
-            <p class="conditions">Partly cloudy</p>
+            <p class="conditions"></p>
             <p class="range">High 16° &nbsp; Low 9° &nbsp; Feels like 12°</p>
         </section>
 
         <!-- Hourly -->
         <section class="panel" aria-labelledby="hourly-title">
             <h2 id="hourly-title">Next 24 hours</h2>
-            <ol class="hourly">
-                <li class="hour is-now"><span class="hour-time">Now</span><span class="hour-icon">⛅</span><span class="hour-temp">14°</span></li>
-                <li class="hour"><span class="hour-time">3 PM</span><span class="hour-icon">☁️</span><span class="hour-temp">15°</span></li>
-                <li class="hour"><span class="hour-time">4 PM</span><span class="hour-icon">☁️</span><span class="hour-temp">14°</span></li>
-                <li class="hour"><span class="hour-time">5 PM</span><span class="hour-icon">🌦️</span><span class="hour-temp">13°</span></li>
-                <li class="hour"><span class="hour-time">6 PM</span><span class="hour-icon">🌧️</span><span class="hour-temp">12°</span></li>
-                <li class="hour"><span class="hour-time">7 PM</span><span class="hour-icon">🌧️</span><span class="hour-temp">11°</span></li>
-                <li class="hour"><span class="hour-time">8 PM</span><span class="hour-icon">☁️</span><span class="hour-temp">11°</span></li>
-                <li class="hour"><span class="hour-time">9 PM</span><span class="hour-icon">🌙</span><span class="hour-temp">10°</span></li>
-            </ol>
+            <ol class="hourly"></ol>
         </section>
 
         <!-- Details -->
@@ -64,50 +55,7 @@
         <!-- 7-day forecast -->
         <section class="panel" aria-labelledby="week-title">
             <h2 id="week-title">7-day forecast</h2>
-            <ul class="week">
-                <li class="day">
-                    <span class="day-name">Today</span><span class="day-icon">⛅</span>
-                    <span class="day-low">9°</span>
-                    <span class="bar"><span class="bar-fill" style="--start: 20%; --end: 70%"></span></span>
-                    <span class="day-high">16°</span>
-                </li>
-                <li class="day">
-                    <span class="day-name">Fri</span><span class="day-icon">🌧️</span>
-                    <span class="day-low">8°</span>
-                    <span class="bar"><span class="bar-fill" style="--start: 12%; --end: 55%"></span></span>
-                    <span class="day-high">13°</span>
-                </li>
-                <li class="day">
-                    <span class="day-name">Sat</span><span class="day-icon">🌦️</span>
-                    <span class="day-low">7°</span>
-                    <span class="bar"><span class="bar-fill" style="--start: 5%; --end: 48%"></span></span>
-                    <span class="day-high">12°</span>
-                </li>
-                <li class="day">
-                    <span class="day-name">Sun</span><span class="day-icon">☀️</span>
-                    <span class="day-low">5°</span>
-                    <span class="bar"><span class="bar-fill" style="--start: 0%; --end: 45%"></span></span>
-                    <span class="day-high">11°</span>
-                </li>
-                <li class="day">
-                    <span class="day-name">Mon</span><span class="day-icon">☁️</span>
-                    <span class="day-low">6°</span>
-                    <span class="bar"><span class="bar-fill" style="--start: 3%; --end: 52%"></span></span>
-                    <span class="day-high">12°</span>
-                </li>
-                <li class="day">
-                    <span class="day-name">Tue</span><span class="day-icon">🌧️</span>
-                    <span class="day-low">8°</span>
-                    <span class="bar"><span class="bar-fill" style="--start: 12%; --end: 58%"></span></span>
-                    <span class="day-high">14°</span>
-                </li>
-                <li class="day">
-                    <span class="day-name">Wed</span><span class="day-icon">⛅</span>
-                    <span class="day-low">9°</span>
-                    <span class="bar"><span class="bar-fill" style="--start: 18%; --end: 66%"></span></span>
-                    <span class="day-high">15°</span>
-                </li>
-            </ul>
+            <ul class="week"></ul>
         </section>
 
     </main>
