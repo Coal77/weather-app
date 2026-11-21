@@ -8,7 +8,6 @@ const form = document.querySelector(".search");
 const input = document.querySelector("#location");
 const button = form.querySelector("button");
 const status = document.querySelector(".status");
-const units = document.querySelectorAll(".unit");
 
 function setStatus(message, isError = false) {
     status.textContent = message;

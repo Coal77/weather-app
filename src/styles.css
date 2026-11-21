@@ -95,6 +95,9 @@ button, input {
     background: var(--sky-top);
     color: #fff;
     cursor: pointer;
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 .search.is-invalid {
@@ -148,6 +151,7 @@ button, input {
 .city {
     font-size: 1.25rem;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .date {
@@ -313,6 +317,26 @@ button, input {
     right: calc(100% - var(--end));
     border-radius: 999px;
     background: linear-gradient(90deg, var(--sky-bottom), var(--accent));
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 8px 16px 32px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.footer a {
+    color: var(--sky-top);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    text-decoration: underline;
 }
 
 /* ---------- Larger screens ---------- */

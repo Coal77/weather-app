@@ -29,7 +29,8 @@ function processWeather(data) {
         lowTemp: data.days[0].tempmin,
     };
 
-    const currentHour = parseInt(data.currentConditions.datetime, 10);
+    //* Add 1 to the current hour cause the api returns the time with an hour deficit
+    const currentHour = parseInt(data.currentConditions.datetime, 10) + 1;
 
     const hourlyWeather = data.days
         .slice(0, 2)
