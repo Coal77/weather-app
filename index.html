@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+<script defer src="main.js"></script></head>
+<body>
+    <main class="app">
+
+        <!-- Search + unit toggle -->
+        <header class="topbar">
+            <form class="search" role="search">
+                <label for="location" class="visually-hidden">Search for a city</label>
+                <input id="location" type="search" placeholder="Search for a city" value="california">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+            <div class="units" role="group" aria-label="Temperature unit">
+                <button class="unit is-active" aria-pressed="true">°C</button>
+                <!-- <button class="unit" aria-pressed="false">°F</button> -->
+            </div>
+        </header>
+        <p class="status" role="status" hidden></p>
+
+        <!-- Current conditions: the hero -->
+        <section class="current" aria-labelledby="city">
+            <h1 id="city" class="city"></h1>
+            <p class="date"></p>
+
+            <div class="current-main">
+                <span class="current-icon" aria-hidden="true"></span>
+                <p class="temp"><span class="temp-value"></span><span class="deg">°</span></p>
+            </div>
+
+            <p class="conditions"></p>
+            <p class="range">High 16° &nbsp; Low 9° &nbsp; Feels like 12°</p>
+        </section>
+
+        <!-- Hourly -->
+        <section class="panel" aria-labelledby="hourly-title">
+            <h2 id="hourly-title">Next 24 hours</h2>
+            <ol class="hourly"></ol>
+        </section>
+
+        <!-- Details -->
+        <section class="details" aria-label="Current details">
+            <div class="detail"><span class="detail-label">Humidity</span><span class="detail-value" id="humidity">72%</span></div>
+            <div class="detail"><span class="detail-label">Wind</span><span class="detail-value" id="wind">18 km/h</span></div>
+            <div class="detail"><span class="detail-label">Chance of rain</span><span class="detail-value" id="rain-chance">40%</span></div>
+            <div class="detail"><span class="detail-label">UV index</span><span class="detail-value" id="uv-index">2</span></div>
+            <div class="detail"><span class="detail-label">Sunrise</span><span class="detail-value" id="sunrise">07:10</span></div>
+            <div class="detail"><span class="detail-label">Sunset</span><span class="detail-value" id="sunset">16:09</span></div>
+        </section>
+
+        <!-- 7-day forecast -->
+        <section class="panel" aria-labelledby="week-title">
+            <h2 id="week-title">7-day forecast</h2>
+            <ul class="week"></ul>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>
+            Weather data provided by
+            <a href="https://www.visualcrossing.com/" target="_blank" rel="noopener noreferrer">Visual Crossing</a>
+        </p>
+    </footer>
+</body>
+</html>
