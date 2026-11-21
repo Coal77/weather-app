@@ -53,6 +53,7 @@ button, input {
     margin: 0 auto;
     padding: 16px;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
 }
 
@@ -175,7 +176,6 @@ button, input {
     background: var(--panel);
     border-radius: var(--radius);
     padding: 18px;
-    overflow-x: scroll;
 }
 
 .panel h2 {
@@ -189,6 +189,7 @@ button, input {
     display: flex;
     gap: 8px;
     overflow-x: auto;
+    scrollbar-width: thin;
     padding-bottom: 6px;
 }
 

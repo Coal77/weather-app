@@ -1,6 +1,6 @@
 import "./styles.css";
 import { fetchWeather, processWeather } from "./api.js";
-import { renderCurrent, renderDetails, renderHours } from "./ui.js";
+import { renderCurrent, renderDetails, renderHours, renderWeek } from "./ui.js";
 
 const apiKey = process.env.VISUAL_CROSSING_API_KEY;
 
@@ -14,6 +14,7 @@ async function main() {
         renderCurrent(weather.current);
         renderDetails(weather.current);
         renderHours(weather.hours);
+        renderWeek(weather.weeklyData, weather.weekRange);
         
     } catch (err) {
         console.error("Error!", err);

@@ -45,4 +45,33 @@ function renderHours(hourlyStat) {
     }
 }
 
-export { renderCurrent, renderDetails, renderHours };
+function renderWeek(weeklyStat, weekRange) {
+    const weekContainer = document.querySelector(".week");
+    weekContainer.replaceChildren();
+
+    for (const [ index, weeklyData ] of weeklyStat.entries()) {
+        const li = factoryElem("li", "day", "");
+        
+        const rawDay = new Date(`${weeklyData.day}T12:00:00`)
+        const processedDay = rawDay.toLocaleDateString("en-GB", { weekday: "short"})
+        const day = factoryElem("span", "day-name", index === 0 ? "Today" : processedDay);
+        const icon = factoryElem("span", "day-icon", `${weeklyData.icon}`);
+        const lowTemp = factoryElem("span", "day-low", `${weeklyData.lowTemp}`);
+        const highTemp = factoryElem("span", "day-high", `${weeklyData.highTemp}`);
+        const bar = factoryElem("span", "bar", "")
+
+        const barFill = factoryElem("span", "bar-fill", "");
+        let min = weekRange.min;
+        let max = weekRange.max;
+        const start = ((weeklyData.lowTemp - min) / ((max - min) !== 0 ? max-min : 1)) * 100;
+        const end = ((weeklyData.highTemp - min) / (max - min)) * 100;
+        barFill.style.setProperty("--start", `${start}%`);
+        barFill.style.setProperty("--end", `${end}%`);
+
+        bar.appendChild(barFill);
+        li.append(day, icon, lowTemp, bar, highTemp);
+        weekContainer.appendChild(li);
+    }
+}
+
+export { renderCurrent, renderDetails, renderHours, renderWeek };
