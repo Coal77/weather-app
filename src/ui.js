@@ -4,6 +4,11 @@ function renderCurrent(current) {
     const city = document.querySelector(".city");
     city.textContent = current.cityName;
 
+    const date = document.querySelector(".date");
+    const rawDate = new Date(`${current.date}T12:00:00`);
+    const dateText = rawDate.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+    date.textContent = dateText
+
     const currentTemp = document.querySelector(".temp-value");
     currentTemp.textContent = Math.round(current.temp);
 
@@ -49,22 +54,25 @@ function renderWeek(weeklyStat, weekRange) {
     const weekContainer = document.querySelector(".week");
     weekContainer.replaceChildren();
 
-    for (const [ index, weeklyData ] of weeklyStat.entries()) {
-        const li = factoryElem("li", "day", "");
-        
-        const rawDay = new Date(`${weeklyData.day}T12:00:00`)
-        const processedDay = rawDay.toLocaleDateString("en-GB", { weekday: "short"})
-        const day = factoryElem("span", "day-name", index === 0 ? "Today" : processedDay);
-        const icon = factoryElem("span", "day-icon", `${weeklyData.icon}`);
-        const lowTemp = factoryElem("span", "day-low", `${weeklyData.lowTemp}`);
-        const highTemp = factoryElem("span", "day-high", `${weeklyData.highTemp}`);
-        const bar = factoryElem("span", "bar", "")
+    const min = weekRange.min;
+    const max = weekRange.max;
+    const range = max - min !== 0 ? max - min : 1;
 
+    for (const [index, weeklyData] of weeklyStat.entries()) {
+        const li = factoryElem("li", "day", "");
+
+        const rawDay = new Date(`${weeklyData.day}T12:00:00`);
+        const processedDay = rawDay.toLocaleDateString("en-GB", { weekday: "short" });
+
+        const day = factoryElem("span", "day-name", index === 0 ? "Today" : processedDay);
+        const icon = factoryElem("span", "day-icon", weeklyData.icon);
+        const lowTemp = factoryElem("span", "day-low", `${Math.round(weeklyData.lowTemp)}°`);
+        const highTemp = factoryElem("span", "day-high", `${Math.round(weeklyData.highTemp)}°`);
+        const bar = factoryElem("span", "bar", "");
         const barFill = factoryElem("span", "bar-fill", "");
-        let min = weekRange.min;
-        let max = weekRange.max;
-        const start = ((weeklyData.lowTemp - min) / ((max - min) !== 0 ? max-min : 1)) * 100;
-        const end = ((weeklyData.highTemp - min) / (max - min)) * 100;
+
+        const start = ((weeklyData.lowTemp - min) / range) * 100;
+        const end = ((weeklyData.highTemp - min) / range) * 100;
         barFill.style.setProperty("--start", `${start}%`);
         barFill.style.setProperty("--end", `${end}%`);
 
@@ -73,5 +81,4 @@ function renderWeek(weeklyStat, weekRange) {
         weekContainer.appendChild(li);
     }
 }
-
 export { renderCurrent, renderDetails, renderHours, renderWeek };

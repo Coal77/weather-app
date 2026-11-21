@@ -14,6 +14,7 @@ function processWeather(data) {
     
     const currentWeather = {
         cityName : data.resolvedAddress,
+        date: data.days[0].datetime,
         temp: data.currentConditions.temp,
         feelsLike: data.currentConditions.feelslike,
         conditions: data.currentConditions.conditions,
